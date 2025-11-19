@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 
 const questionSchema = new mongoose.Schema({
     questionText: { type: String, required: true },
-    options: { type: String, required: true }, // e.g 4 options
+    options: { type: [String], required: true }, // e.g 4 options
     correctIndex: { type: Number, required: true}, // 0-3
     category: { type: String, default: "Dragon Ball"},
     difficulty: { type: String, default: "easy" }

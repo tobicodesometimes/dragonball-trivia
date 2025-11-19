@@ -1,6 +1,5 @@
-import mongoose from "mongoose"
-
 // backend/models/Question.js schema setup 
+import mongoose from "mongoose"
 
 const questionSchema = new mongoose.Schema({
     questionText: { type: String, required: true },

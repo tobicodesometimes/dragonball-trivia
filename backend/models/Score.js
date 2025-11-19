@@ -1,6 +1,5 @@
-import mongoose from "mongoose"
-
 // backend/models/Score.js schema setup
+import mongoose from "mongoose"
 
 const scoreSchema = new mongoose.Schema(
     {

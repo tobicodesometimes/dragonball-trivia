@@ -1,3 +1,4 @@
+// src/components/StartScreen.jsx
 function StartScreen ({onStart, loading, error}) {
     return (
         <div className = "start-screen">

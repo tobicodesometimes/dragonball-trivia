@@ -1,15 +1,18 @@
-// src/App.jsx 
-import { useState } from "react";
-import StartScreen from "./components/StartScreen";
-import Quiz from "./components/Quiz";
-import ResultScreen from "./components/ResultScreen";
-import Leaderboard from "./components/Leaderboard";
+// src/App.jsx
+import { useState } from 'react';
+import StartScreen from './components/StartScreen';
+import Quiz from './components/Quiz';
+import ResultScreen from './components/ResultScreen';
+import Leaderboard from './components/Leaderboard';
 import './App.css';
+
+// one-star Dragon Ball img
+import oneStarBall from './assets/one_star_db.png';
 
 const API_BASE_URL = 'http://localhost:5000';
 
 function App() {
-  const [stage, setStage] = useState('start'); // 'start' | 'quiz' | 'result' | 'leaderboard'
+  const [stage, setStage] = useState('start');
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -25,8 +28,8 @@ function App() {
     try {
       const res = await fetch(`${API_BASE_URL}/api/questions?limit=10`);
       if (!res.ok) throw new Error('Request failed');
-
       const data = await res.json();
+
       if (!Array.isArray(data) || data.length === 0) {
         setError('No questions found. Try seeding again.');
         return;
@@ -57,21 +60,21 @@ function App() {
     }
   };
 
-  const handlePlayAgain = () => {
-    setStage('start');
-  };
-
-  const handleViewLeaderboard = () => {
-    setStage('leaderboard');
-  };
-
-  const handleBackHome = () => {
-    setStage('start');
-  };
+  const handlePlayAgain = () => setStage('start');
+  const handleViewLeaderboard = () => setStage('leaderboard');
+  const handleBackHome = () => setStage('start');
 
   return (
     <div className="app">
-      <h1>Dragon Ball Trivia</h1>
+      {/*Title row: text + dragon ball */}
+      <div className="app-title">
+        <h1>Dragon Ball Trivia</h1>
+        <img
+          src={oneStarBall}
+          alt="One-star Dragon Ball"
+          className="app-title-icon"
+        />
+      </div>
 
       {stage === 'start' && (
         <StartScreen onStart={startGame} loading={loading} error={error} />
@@ -105,3 +108,4 @@ function App() {
 }
 
 export default App;
+ 

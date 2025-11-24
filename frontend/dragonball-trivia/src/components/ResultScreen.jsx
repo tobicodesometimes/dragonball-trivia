@@ -1,4 +1,8 @@
-// src/components/ResultScreen.jsx
+// src/components/ResultScreen.jsx 
+// End-of-quiz screen + save score.
+// Props : score, totalQuestions, onPlayAgain, onviewLeaderboard and apiBaseUrl - which POSTs to our backend. 
+// Local state : saving, saved, error and name for nickname input. 
+
 import { useState } from 'react';
 
 function ResultScreen({ score, totalQuestions, onPlayAgain, onViewLeaderboard, apiBaseUrl }) {
@@ -7,6 +11,7 @@ function ResultScreen({ score, totalQuestions, onPlayAgain, onViewLeaderboard, a
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState('');
 
+  // Backend communication 
   const handleSave = async () => {
     if (!name) {
       setError('Please enter a name.');
@@ -39,6 +44,7 @@ function ResultScreen({ score, totalQuestions, onPlayAgain, onViewLeaderboard, a
       setSaving(false);
     }
   };
+  // backend saves with Score.create and returns JSON
 
   return (
     <div className="result">

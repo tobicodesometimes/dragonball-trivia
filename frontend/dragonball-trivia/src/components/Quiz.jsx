@@ -1,4 +1,6 @@
-// src/components/Quiz.jsx
+// src/components/Quiz.jsx Renders one question at a time. 
+// uses props from App.jsx = question, currentIndex, totalQuestions, score and onAnswer(index) callback when a user picks an option.
+
 function Quiz({ question, currentIndex, totalQuestions, score, onAnswer }) {
   if (!question) return null;
 
@@ -11,7 +13,7 @@ function Quiz({ question, currentIndex, totalQuestions, score, onAnswer }) {
 
       <div className="options">
         {question.options.map((opt, index) => (
-          <button key={index} onClick={() => onAnswer(index)}>
+          <button key={index} onClick={() => onAnswer(index)}> 
             {opt}
           </button>
         ))}
@@ -21,5 +23,9 @@ function Quiz({ question, currentIndex, totalQuestions, score, onAnswer }) {
     </div>
   );
 }
+
+// displays current question, the question text and maps question.options into buttons.
+// When you click an option, it calls onAnswer(index) which lives in App then updates score and advances.
+// No direct backend call from here; just UI + state callbacks.
 
 export default Quiz;

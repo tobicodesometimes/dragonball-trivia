@@ -5,6 +5,7 @@ import Question from './models/Question.js';
 
 dotenv.config();
 
+// The questions we are sourcing from. 
 const questions = [
   {
     questionText: 'What is the name of Goku’s father?',
@@ -87,6 +88,7 @@ async function seed() {
     await Question.deleteMany({});
     console.log('Cleared old questions');
 
+    // inserts new questions. 
     await Question.insertMany(questions);
     console.log('Inserted new Dragon Ball questions');
 

@@ -1,4 +1,4 @@
-// src/components/Leaderboard.jsx
+// src/components/Leaderboard.jsx Shows top score pulled from backend.
 import { useEffect, useState } from "react";
 
 function Leaderboard({ apiBaseUrl, onBack }) {
@@ -6,6 +6,7 @@ function Leaderboard({ apiBaseUrl, onBack }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Our mounted useEffect calls the score route, queries for our top 10 scores then our component displays them in a list. 
   useEffect(() => {
     const fetchScores = async () => {
       try {

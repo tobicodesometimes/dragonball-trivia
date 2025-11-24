@@ -1,10 +1,11 @@
-// backend/routes/scoreRoutes.js
+// backend/routes/scoreRoutes.js Handles all our scoreRoutes 
 import express from 'express';
 import Score from '../models/Score.js';
 
 const router = express.Router();
 
 // POST /api/scores
+// Saves a new score 
 router.post('/', async (req, res) => {
   try {
     const { name, score, totalQuestions } = req.body;
@@ -24,12 +25,13 @@ router.post('/', async (req, res) => {
 });
 
 // GET /api/scores/top
+// gets top scores
 router.get('/top', async (req, res) => {
   try {
     const topScores = await Score.find()
       .sort({ score: -1, createdAt: 1 })
       .limit(10)
-      .lean();
+      .lean(); // returns plain js objs instead of full Mongoose doc instances (faster). 
 
     res.json(topScores);
   } catch (err) {
@@ -37,5 +39,8 @@ router.get('/top', async (req, res) => {
     res.status(500).json({ message: 'Server error fetching top scores' });
   }
 });
+
+// POST /api/scores = ResultScreen uses this to save our score.
+// GET /api/scores/top = Leaderboard uses this to show the top 10.
 
 export default router;

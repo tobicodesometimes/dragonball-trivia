@@ -12,13 +12,14 @@ import oneStarBall from './assets/one_star_db.png';
 const API_BASE_URL = 'http://localhost:5000';
 
 function App() {
-  const [stage, setStage] = useState('start');
-  const [questions, setQuestions] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [stage, setStage] = useState('start'); // stage – which screen we’re on: 'start' | 'quiz' | 'result' | 'leaderboard'.
+  const [questions, setQuestions] = useState([]); // questions – array of question objects from the backend.
+  const [currentIndex, setCurrentIndex] = useState(0); // currentIndex – which question we’re on.
+  const [score, setScore] = useState(0); // score – how many correct answers so far.
+  const [loading, setLoading] = useState(false); // loading for our state 
+  const [error, setError] = useState(''); // handles our error messaging. 
 
+  // Fetches questions from our backend 
   const startGame = async () => {
     setLoading(true);
     setError('');
@@ -45,13 +46,14 @@ function App() {
     }
   };
 
+  // Handles our answering. 
   const handleAnswer = (selectedIndex) => {
     const currentQuestion = questions[currentIndex];
 
     if (selectedIndex === currentQuestion.correctIndex) {
       setScore((prev) => prev + 1);
     }
-
+    // moves to the next question or result screen 
     const nextIndex = currentIndex + 1;
     if (nextIndex < questions.length) {
       setCurrentIndex(nextIndex);

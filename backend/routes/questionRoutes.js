@@ -1,4 +1,4 @@
-// backend/routes/questionRoutes.js
+// backend/routes/questionRoutes.js Handles all our question routes. 
 import express from "express";
 import Question from "../models/Question.js";
 
@@ -14,8 +14,8 @@ router.get('/', async (req, res) => {
     if (difficulty) match.difficulty = difficulty;
 
     const pipeline = [
-      { $match: match },
-      { $sample: { size: parseInt(limit, 10) } }
+      { $match: match }, // filter (if provided)
+      { $sample: { size: parseInt(limit, 10) } } // randomizes our questions
     ];
 
     const questions = await Question.aggregate(pipeline);
@@ -25,5 +25,9 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'Server error fetching questions' });
   }
 });
+
+// we use limit to filter how many questions we want
+// match and sample randomizes our questions 
+// then we send them back as JSON
 
 export default router;

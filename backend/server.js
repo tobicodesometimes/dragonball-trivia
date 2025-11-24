@@ -13,12 +13,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 //Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors()); // lets frontend (other origin) call the API
+app.use(express.json()); // parses our request bodies 
 
 //Routes
-app.use("/api/questions", questionRoutes);
-app.use("/api/scores", scoreRoutes);
+app.use("/api/questions", questionRoutes); // this route triggers our questionRoute
+app.use("/api/scores", scoreRoutes); // this route triggers our scoreRoute
 
 //Root test route 
 app.get("/", (req, res) => {
